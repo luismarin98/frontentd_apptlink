@@ -1,4 +1,4 @@
-import * as React from 'react';
+
 import { DashboardProvider } from '../Features/Dashboard/provider';
 import { PRODUCTOS_VIEW } from '../Features/Dashboard/Views/ProductoView';
 

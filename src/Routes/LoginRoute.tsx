@@ -1,6 +1,6 @@
-import * as React from 'react';
 
-export const LOGIN_ROUtE = () => {
+
+export const LOGIN_ROUTE = () => {
     return (
         <div>Login</div>
     )

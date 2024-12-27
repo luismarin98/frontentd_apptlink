@@ -1,4 +1,4 @@
-import * as React from 'react';
+
 import { createContext, ReactNode } from 'react';
 
 export interface IDashboardContext { }
