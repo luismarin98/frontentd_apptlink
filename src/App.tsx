@@ -9,17 +9,19 @@ import { PRODUCTOS_ROUTE } from './Routes/ProductosRoute';
 import { FACTURACION_VIEW } from './Features/Dashboard/Views/FacturacionView';
 
 export const App = () => {
-  <div className="App">
-    <Routes>
-      <Route path="/home" element={<HOME_ROUTE />} />
-      <Route path="/dashboard" element={<DASHBOARD_FEATURE />}>
-        <Route path="pedidos" element={<PEDIDOS_ROUTE />} />
-        <Route path="inventario" element={<INVENTARIO_ROUTE />} />
-        <Route path='producto' element={<PRODUCTOS_ROUTE />} />
-        <Route path='facturacion' element={<FACTURACION_VIEW />} />
-      </Route>
-      <Route path="/login" element={<LOGIN_ROUtE />} />
-      <Route path="*" element={<div>Not Found</div>} />
-    </Routes>
-  </div>
+  return (
+    <div className="App">
+      <Routes>
+        <Route path="/home" element={<HOME_ROUTE />} />
+        <Route path="/dashboard" element={<DASHBOARD_FEATURE />}>
+          <Route path="pedidos" element={<PEDIDOS_ROUTE />} />
+          <Route path="inventario" element={<INVENTARIO_ROUTE />} />
+          <Route path='producto' element={<PRODUCTOS_ROUTE />} />
+          <Route path='facturacion' element={<FACTURACION_VIEW />} />
+        </Route>
+        <Route path="/login" element={<LOGIN_ROUtE />} />
+        <Route path="*" element={<div>Not Found</div>} />
+      </Routes>
+    </div>
+  )
 }
