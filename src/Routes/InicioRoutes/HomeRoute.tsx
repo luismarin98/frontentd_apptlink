@@ -1,7 +1,7 @@
-import { START_FEATURE } from "../../Features/InicioFeature"
 import { StartProvider } from "../../Features/InicioFeature/provider"
+import { HOME_VIEW } from "../../Features/InicioFeature/Views/HomeView"
 
 
 export const HOME_ROUTE = () => {
-    return <StartProvider children={<START_FEATURE />} />
+    return <StartProvider children={<HOME_VIEW />} />
 }
