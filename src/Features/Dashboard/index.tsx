@@ -1,9 +1,56 @@
 import { FC, useContext, MouseEvent } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import DashboardContext, { IDashboardContext } from './provider';
+import { UsuarioType } from '../../Interfaces/UsuarioRequest';
+import { jwtDecode } from 'jwt-decode';
+import { ButtonComponent } from '../../Components/ButtonComponent';
+
+interface PropsRoutes {
+    name: string;
+    clickEvent: (e: MouseEvent<HTMLButtonElement>) => void;
+    icon: JSX.Element;
+}
 
 export const DASHBOARD_FEATURE: FC = () => {
     const { isOpen, setIsOpen } = useContext(DashboardContext) as IDashboardContext;
+    const navigate = useNavigate();
+
+    const usuario: UsuarioType | null = JSON.parse(jwtDecode(localStorage.getItem('usuario')!).sub!);
+
+    const routes: PropsRoutes[] = [
+        {
+            icon: <span className="material-symbols-outlined">format_list_bulleted</span>,
+            name: 'Producto',
+            clickEvent: (e) => {
+                e.preventDefault();
+                navigate(`/dashboard/${usuario!.id}/producto`)
+            }
+        },
+        {
+            icon: <span className="material-symbols-outlined">orders</span>,
+            name: 'Pedidos',
+            clickEvent: (e) => {
+                e.preventDefault();
+                navigate(`/dashboard/${usuario!.id}/pedidos`);
+            }
+        },
+        {
+            icon: <span className="material-symbols-outlined">format_list_bulleted</span>,
+            name: 'Inventario',
+            clickEvent: (e) => {
+                e.preventDefault();
+                navigate(`/dashboard/${usuario!.id}/inventario`);
+            }
+        },
+        {
+            icon: <span className="material-symbols-outlined">contract</span>,
+            name: 'Facturacion',
+            clickEvent: (e) => {
+                e.preventDefault();
+                navigate(`/dahsboard/${usuario!.id}/facturacion`)
+            }
+        }
+    ]
 
     const handleHideShowSide = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -24,8 +71,14 @@ export const DASHBOARD_FEATURE: FC = () => {
                             <button onClick={handleHideShowSide} className='p-1 flex items-center justify-center flex-row text-white bg-neutral-800 rounded-md'>
                                 <span className="material-symbols-outlined">menu_open</span>
                             </button>
-                            <div className='h-full'>
-
+                            <div className='h-full flex flex-col gap-2 justify-center items-center'>
+                                {
+                                    routes.map((data, i) => <ButtonComponent onClick={data.clickEvent} key={i} children={
+                                        <>
+                                            {isOpen && data.name} {data.icon}
+                                        </>
+                                    } />)
+                                }
                             </div>
                             <button onClick={handleLogout} className='p-1 flex items-center justify-center text-white bg-neutral-800 rounded-md'>
                                 <span className="material-symbols-outlined">logout</span>

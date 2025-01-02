@@ -2,8 +2,11 @@
 
 export const PEDIDOS_VIEW = () => {
     return (
-        <div>
-            <h1>Pedidos</h1>
+        <div className="w-full h-full flex items-center justify-center">
+            <p className="font-semibold text-xl">Pedidos</p>
+            <div className="w-full h-full flex flex-col justify-between">
+                
+            </div>
         </div>
     );
 }

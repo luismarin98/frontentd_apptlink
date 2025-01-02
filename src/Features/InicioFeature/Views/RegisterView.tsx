@@ -5,7 +5,7 @@ import { RegisterUserType } from "../../../Interfaces/UsuarioRequest";
 import StartContext, { IStartContext } from "../provider";
 
 export const REGISTER_VIEW = () => {
-    const { executeAsync } = useContext(StartContext) as IStartContext;
+    const { register_usuario } = useContext(StartContext) as IStartContext;
     const [coincidence, setCoincidence] = useState<boolean>(false);
     const [check, setCheck] = useState<boolean>(false);
 
@@ -14,7 +14,7 @@ export const REGISTER_VIEW = () => {
     const handleCoincidence = (e: ChangeEvent<HTMLInputElement>) => e.target.value === getValues('password') && setCoincidence(!coincidence);
     const handleCheck = (e: ChangeEvent<HTMLInputElement>) => e.target.checked && setCheck(!check);
 
-    const submitForm = handleSubmit(data => executeAsync(data));
+    const submitForm = handleSubmit(data => register_usuario(data));
 
     return (
         <div className="w-full h-full flex items-center justify-center">

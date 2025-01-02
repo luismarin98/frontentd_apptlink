@@ -1,10 +1,8 @@
 import { createContext, ReactNode, useState, Dispatch, SetStateAction } from "react";
-import { useRestore } from "./hooks/useRestore";
-import { useAuth } from "./hooks/useAuth";
 import { AuthUsuarioType } from "../../Interfaces/AuthRequest";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { useRegister } from "./hooks/useRegister";
-import { RegisterUserType } from "../../Interfaces/UsuarioRequest";
+import { RegisterUserType, UsuarioType } from "../../Interfaces/UsuarioRequest";
+import { useUsuario } from "./hooks/useUsuario";
 
 export interface IStartContext {
     isOpen: boolean;
@@ -15,7 +13,8 @@ export interface IStartContext {
     setLoading: Dispatch<SetStateAction<boolean>>;
     verificarCodigo: (email: string, code: string) => void;
     login: (data: AuthUsuarioType) => void;
-    executeAsync: (usuario: RegisterUserType) => void;
+    register_usuario: (usuario: RegisterUserType) => string | undefined;
+    updateUser: (body: UsuarioType) => void;
 }
 
 const StartContext = createContext({});
@@ -25,9 +24,7 @@ export const StartProvider = ({ children }: { children: ReactNode }) => {
     const [loading, setLoading] = useState<boolean>(false);
     const navigate = useNavigate();
 
-    const { codeInput, verificarCodigo } = useRestore();
-    const { executeAsync } = useRegister();
-    const { login } = useAuth();
+    const { login, codeInput, register_usuario, verificarCodigo, updateUser } = useUsuario();
 
     const storage: IStartContext = {
         isOpen,
@@ -38,7 +35,8 @@ export const StartProvider = ({ children }: { children: ReactNode }) => {
         verificarCodigo,
         login,
         navigate,
-        executeAsync
+        register_usuario,
+        updateUser
     };
 
     return <StartContext.Provider value={storage}>{children}</StartContext.Provider>
