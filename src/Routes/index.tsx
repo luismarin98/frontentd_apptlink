@@ -7,8 +7,6 @@ import { VERIFICATE_ROUTE } from './InicioRoutes/VerificateRoute';
 import { REGISTER_ROUTE } from './InicioRoutes/RegisterRoute';
 import { LOGIN_ROUTE } from './InicioRoutes/LoginRoute';
 import { HOME_ROUTE } from './InicioRoutes/HomeRoute';
-import { INVENTARIO_ROUTE } from './DashboardRoutes/InventarioRoute';
-import { PEDIDOS_ROUTE } from './DashboardRoutes/PedidosRoute';
 import { PRODUCTOS_ROUTE } from './DashboardRoutes/ProductosRoute';
 import { FACTURACION_FEATURE } from './DashboardRoutes/FacturacionRoute';
 import { HOME_DASH_ROUTE } from './DashboardRoutes/HomeDashRoute';
@@ -16,9 +14,7 @@ import { HOME_DASH_ROUTE } from './DashboardRoutes/HomeDashRoute';
 export const DashboardRoutes = {
     FacturacionRoute: () => <FACTURACION_FEATURE />,
     ProductosRoute: () => <PRODUCTOS_ROUTE />,
-    PedidosRoute: () => <PEDIDOS_ROUTE />,
     DashboardRoute: () => <DashboardProvider children={<DASHBOARD_FEATURE />} />,
-    InventarioRoute: () => <INVENTARIO_ROUTE />,
     HomeDashRoute: () => <HOME_DASH_ROUTE />
 }
 

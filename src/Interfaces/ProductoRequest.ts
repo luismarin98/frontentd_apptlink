@@ -6,5 +6,5 @@ export interface ProductoType extends BaseType {
     descripcion: string | null;
     precio: number;
     stock: number;
-    categoria_id: number;
+    categoria_id: number | null;
 }

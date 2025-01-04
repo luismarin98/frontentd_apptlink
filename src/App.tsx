@@ -3,9 +3,12 @@ import { DashboardRoutes, InicioRoutes } from './Routes';
 import { UsuarioType } from './Interfaces/UsuarioRequest';
 import { useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
+import { useDispatch } from 'react-redux';
+import { getUsuario } from './Store/Usuario/usuario.slice';
 
 export const App = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const token = localStorage.getItem('usuario');
@@ -13,6 +16,7 @@ export const App = () => {
       try {
         const decoded = jwtDecode(token);
         const user = JSON.parse(decoded.sub!) as UsuarioType;
+        dispatch(getUsuario(user));
         navigate(`/dashboard/${user.id}`);
       } catch (error) {
         console.error('Invalid token', error);
@@ -36,8 +40,6 @@ export const App = () => {
         </Route>
         <Route path="/dashboard/:userid" element={<DashboardRoutes.DashboardRoute />}>
           <Route path='' element={<DashboardRoutes.HomeDashRoute />} />
-          <Route path="pedidos" element={<DashboardRoutes.PedidosRoute />} />
-          <Route path="inventario" element={<DashboardRoutes.InventarioRoute />} />
           <Route path='producto' element={<DashboardRoutes.ProductosRoute />} />
           <Route path='facturacion' element={<DashboardRoutes.FacturacionRoute />} />
           <Route path="*" element={<div>Not Found</div>} />

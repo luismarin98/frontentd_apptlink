@@ -11,9 +11,13 @@ import { PedidoType } from '../../Interfaces/PedidoRequest';
 
 export interface IDashboardContext {
     isOpen: boolean
+    isOpenModal: boolean
     loading: boolean
+    isEdit: boolean
 
+    setIsEdit: Dispatch<SetStateAction<boolean>>
     setIsOpen: Dispatch<SetStateAction<boolean>>
+    setIsOpenModal: Dispatch<SetStateAction<boolean>>
     setIsLoading: Dispatch<SetStateAction<boolean>>
 
     //Productos
@@ -49,6 +53,8 @@ const DashboardContext = createContext({});
 
 export const DashboardProvider = ({ children }: { children: ReactNode }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+    const [isEdit, setIsEdit] = useState<boolean>(false);
     const [loading, setIsLoading] = useState<boolean>(false);
 
     const { delete_productos, get_productos, getAll_productos, post_productos, put_productos } = useProducto();
@@ -64,7 +70,9 @@ export const DashboardProvider = ({ children }: { children: ReactNode }) => {
         delete_productos, get_productos, getAll_productos, post_productos, put_productos,
         getAll_detallePedidos, get_detallePedidos, post_detallePedidos, put_detallePedidos, delete_detallePedidos,
         delete_categoria, get_all_categorias, get_categoria, post_categoria, put_categoria,
-        delete_pedido, getAll_pedidos, get_pedido, post_pedido, put_pedido
+        delete_pedido, getAll_pedidos, get_pedido, post_pedido, put_pedido,
+        isOpenModal, setIsOpenModal,
+        isEdit, setIsEdit
     };
 
     return <DashboardContext.Provider value={storage}>{children}</DashboardContext.Provider>;

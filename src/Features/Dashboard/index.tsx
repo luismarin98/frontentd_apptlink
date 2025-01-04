@@ -19,14 +19,6 @@ export const DASHBOARD_FEATURE: FC = () => {
 
     const routes: PropsRoutes[] = [
         {
-            icon: <span className="material-symbols-outlined">format_list_bulleted</span>,
-            name: 'Producto',
-            clickEvent: (e) => {
-                e.preventDefault();
-                navigate(`/dashboard/${usuario!.id}/producto`)
-            }
-        },
-        {
             icon: <span className="material-symbols-outlined">orders</span>,
             name: 'Pedidos',
             clickEvent: (e) => {
@@ -36,6 +28,14 @@ export const DASHBOARD_FEATURE: FC = () => {
         },
         {
             icon: <span className="material-symbols-outlined">format_list_bulleted</span>,
+            name: 'Producto',
+            clickEvent: (e) => {
+                e.preventDefault();
+                navigate(`/dashboard/${usuario!.id}/producto`)
+            }
+        },
+        {
+            icon: <span className="material-symbols-outlined">storefront</span>,
             name: 'Inventario',
             clickEvent: (e) => {
                 e.preventDefault();
@@ -71,13 +71,9 @@ export const DASHBOARD_FEATURE: FC = () => {
                             <button onClick={handleHideShowSide} className='p-1 flex items-center justify-center flex-row text-white bg-neutral-800 rounded-md'>
                                 <span className="material-symbols-outlined">menu_open</span>
                             </button>
-                            <div className='h-full flex flex-col gap-2 justify-center items-center'>
+                            <div className='h-full w-full flex flex-col justify-center items-center gap-2'>
                                 {
-                                    routes.map((data, i) => <ButtonComponent onClick={data.clickEvent} key={i} children={
-                                        <>
-                                            {isOpen && data.name} {data.icon}
-                                        </>
-                                    } />)
+                                    routes.map((data, i) => <ButtonComponent type_button='info' onClick={data.clickEvent} key={i}>{data.icon} <span className='w-full'>{isOpen && data.name}</span></ButtonComponent>)
                                 }
                             </div>
                             <button onClick={handleLogout} className='p-1 flex items-center justify-center text-white bg-neutral-800 rounded-md'>

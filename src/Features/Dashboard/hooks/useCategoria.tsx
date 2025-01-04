@@ -11,9 +11,26 @@ export const useCategoria = () => {
     const { setIsLoading } = useContext(DashboardContext) as IDashboardContext;
     const dispatch = useDispatch();
 
+    const categorias: CategoriaType[] = [
+        {
+            id: 1,
+            nombre: 'Higiene',
+            descripcion: 'Productos de higiene personal',
+            fecha_creacion: new Date().toISOString(),
+            fecha_actualizacion: new Date().toISOString()
+        }
+    ];
+
     const get_categoria = (id: number) => {
         setIsLoading(true);
-        toast.promise(axios.get<CategoriaType>(`${api_consum}/Categoria/${id}`), {
+        dispatch(getCategoria({
+            id: 1,
+            nombre: 'Higiene',
+            descripcion: 'Productos de higiene personal',
+            fecha_creacion: new Date().toISOString(),
+            fecha_actualizacion: new Date().toISOString()
+        }));
+        /* toast.promise(axios.get<CategoriaType>(`${api_consum}/Categoria/${id}`), {
             loading: 'Cargando categorias',
             success: (res) => {
                 setIsLoading(false);
@@ -24,12 +41,13 @@ export const useCategoria = () => {
                 setIsLoading(false);
                 return err.response!.data;
             }
-        });
+        }); */
     };
 
     const get_all_categorias = () => {
         setIsLoading(true);
-        toast.promise(axios.get<CategoriaType[]>(`${api_consum}/Categoria`), {
+        dispatch(getCategorias(categorias));
+        /* toast.promise(axios.get<CategoriaType[]>(`${api_consum}/Categoria`), {
             loading: 'Cargando categorias',
             success: (res) => {
                 setIsLoading(false);
@@ -40,7 +58,7 @@ export const useCategoria = () => {
                 setIsLoading(false);
                 return err.response!.data;
             }
-        });
+        }); */
     };
 
     const post_categoria = (categoria: CategoriaType) => {
