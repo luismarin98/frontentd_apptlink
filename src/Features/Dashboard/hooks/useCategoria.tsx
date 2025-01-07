@@ -11,26 +11,9 @@ export const useCategoria = () => {
     const { setIsLoading } = useContext(DashboardContext) as IDashboardContext;
     const dispatch = useDispatch();
 
-    const categorias: CategoriaType[] = [
-        {
-            id: 1,
-            nombre: 'Higiene',
-            descripcion: 'Productos de higiene personal',
-            fecha_creacion: new Date().toISOString(),
-            fecha_actualizacion: new Date().toISOString()
-        }
-    ];
-
     const get_categoria = (id: number) => {
         setIsLoading(true);
-        dispatch(getCategoria({
-            id: 1,
-            nombre: 'Higiene',
-            descripcion: 'Productos de higiene personal',
-            fecha_creacion: new Date().toISOString(),
-            fecha_actualizacion: new Date().toISOString()
-        }));
-        /* toast.promise(axios.get<CategoriaType>(`${api_consum}/Categoria/${id}`), {
+        toast.promise(axios.get<CategoriaType>(`${api_consum}/Categoria/${id}`), {
             loading: 'Cargando categorias',
             success: (res) => {
                 setIsLoading(false);
@@ -41,13 +24,12 @@ export const useCategoria = () => {
                 setIsLoading(false);
                 return err.response!.data;
             }
-        }); */
+        });
     };
 
     const get_all_categorias = () => {
         setIsLoading(true);
-        dispatch(getCategorias(categorias));
-        /* toast.promise(axios.get<CategoriaType[]>(`${api_consum}/Categoria`), {
+        toast.promise(axios.get<CategoriaType[]>(`${api_consum}/Categoria`), {
             loading: 'Cargando categorias',
             success: (res) => {
                 setIsLoading(false);
@@ -58,7 +40,7 @@ export const useCategoria = () => {
                 setIsLoading(false);
                 return err.response!.data;
             }
-        }); */
+        });
     };
 
     const post_categoria = (categoria: CategoriaType) => {
@@ -80,7 +62,7 @@ export const useCategoria = () => {
     const put_categoria = (categoria: CategoriaType) => {
         setIsLoading(true);
         toast.promise(axios.put(`${api_consum}/Categoria`, { ...categoria }), {
-            loading: 'Guardando categorias',
+            loading: 'Actualizando categorias',
             success: (res) => {
                 setIsLoading(false);
                 dispatch(getCategoria(res.data));
@@ -96,7 +78,7 @@ export const useCategoria = () => {
     const delete_categoria = (id: number) => {
         setIsLoading(true);
         toast.promise(axios.delete(`${api_consum}/Categoria/${id}`), {
-            loading: 'Cargando categorias',
+            loading: 'Eliminando categorias',
             success: (res) => {
                 setIsLoading(false);
                 dispatch(getCategoria(res.data));

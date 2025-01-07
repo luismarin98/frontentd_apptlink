@@ -23,7 +23,7 @@ export const DASHBOARD_FEATURE: FC = () => {
             name: 'Pedidos',
             clickEvent: (e) => {
                 e.preventDefault();
-                navigate(`/dashboard/${usuario!.id}/pedidos`);
+                navigate(`/dashboard/${usuario!.id}/pedido`);
             }
         },
         {
@@ -34,22 +34,6 @@ export const DASHBOARD_FEATURE: FC = () => {
                 navigate(`/dashboard/${usuario!.id}/producto`)
             }
         },
-        {
-            icon: <span className="material-symbols-outlined">storefront</span>,
-            name: 'Inventario',
-            clickEvent: (e) => {
-                e.preventDefault();
-                navigate(`/dashboard/${usuario!.id}/inventario`);
-            }
-        },
-        {
-            icon: <span className="material-symbols-outlined">contract</span>,
-            name: 'Facturacion',
-            clickEvent: (e) => {
-                e.preventDefault();
-                navigate(`/dahsboard/${usuario!.id}/facturacion`)
-            }
-        }
     ]
 
     const handleHideShowSide = (e: MouseEvent<HTMLButtonElement>) => {

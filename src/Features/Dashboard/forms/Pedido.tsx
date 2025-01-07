@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux"
-import { pedido_selector } from "../../../../Store/Pedido/pedido.selector"
+import { pedido_selector } from "../../../Store/Pedido/pedido.selector"
 import { useForm } from "react-hook-form";
 import { useContext, useEffect } from "react";
-import DashboardContext, { IDashboardContext } from "../../provider";
-import { DetallePedidoType } from "../../../../Interfaces/DetallePedidoRequest";
+import DashboardContext, { IDashboardContext } from "../provider";
+import { DetallePedidoType } from "../../../Interfaces/DetallePedidoRequest";
 
 export const EDIT_PEDIDO = () => {
     const { put_detallePedidos, get_pedido, get_productos } = useContext(DashboardContext) as IDashboardContext;

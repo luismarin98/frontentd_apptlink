@@ -6,4 +6,4 @@ export const selectDetallePedido = (state: RootState) => state.detallePedidoStat
 
 export const detalle_pedido_selector = createSelector(selectDetallePedido, (state: DetallePedidoState) => state.detallepedido);
 
-export const pedido_list_selector = createSelector(selectDetallePedido, (state: DetallePedidoState) => state.detallepedidos);
+export const detalle_pedido_list_selector = createSelector(selectDetallePedido, (state: DetallePedidoState) => state.detallepedidos);

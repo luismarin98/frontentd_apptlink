@@ -10,8 +10,9 @@ export const App = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const token = localStorage.getItem('usuario');
+  
   useEffect(() => {
-    const token = localStorage.getItem('usuario');
     if (token) {
       try {
         const decoded = jwtDecode(token);
@@ -25,7 +26,7 @@ export const App = () => {
     } else {
       navigate('/');
     }
-  }, []);
+  }, [token]);
 
   return (
     <div className="bg-neutral-800 h-screen w-screen flex justify-center text-white items-center">
@@ -41,7 +42,7 @@ export const App = () => {
         <Route path="/dashboard/:userid" element={<DashboardRoutes.DashboardRoute />}>
           <Route path='' element={<DashboardRoutes.HomeDashRoute />} />
           <Route path='producto' element={<DashboardRoutes.ProductosRoute />} />
-          <Route path='facturacion' element={<DashboardRoutes.FacturacionRoute />} />
+          <Route path='pedido' element={<DashboardRoutes.PedidosRoute />} />
           <Route path="*" element={<div>Not Found</div>} />
         </Route>
         <Route path="*" element={<div>Not Found</div>} />

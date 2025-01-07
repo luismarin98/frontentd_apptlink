@@ -6,7 +6,7 @@ interface IPropsButtonComponent extends ButtonHTMLAttributes<HTMLButtonElement> 
 }
 
 export const ButtonComponent = (props: IPropsButtonComponent) => {
-    const [color, setColor] = useState<string>();
+    const [color, setColor] = useState<string>('');
 
     useEffect(() => {
         switch (props.type_button) {
