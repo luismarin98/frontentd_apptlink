@@ -18,6 +18,7 @@ export interface IDashboardContext {
     isEdit: boolean
     openDraw: boolean
     createCategoria: boolean
+    openSearchProducto: boolean
 
     setCreateCategoria: Dispatch<SetStateAction<boolean>>
     setOpenDraw: Dispatch<SetStateAction<boolean>>
@@ -25,6 +26,7 @@ export interface IDashboardContext {
     setIsOpen: Dispatch<SetStateAction<boolean>>
     setIsOpenModal: Dispatch<SetStateAction<boolean>>
     setIsLoading: Dispatch<SetStateAction<boolean>>
+    setOpenSearchProducto: Dispatch<SetStateAction<boolean>>
 
     //Productos
     delete_productos: (id: number) => void;
@@ -68,6 +70,7 @@ export const DashboardProvider = ({ children }: { children: ReactNode }) => {
     const [loading, setIsLoading] = useState<boolean>(false);
     const [openDraw, setOpenDraw] = useState<boolean>(false);
     const [createCategoria, setCreateCategoria] = useState<boolean>(false);
+    const [openSearchProducto, setOpenSearchProducto] = useState<boolean>(false);
 
     const { delete_productos, get_productos, getAll_productos, post_productos, put_productos, get_filter_productos } = useProducto();
     const { getAll_detallePedidos, get_detallePedidos, post_detallePedidos, put_detallePedidos, delete_detallePedidos } = useDetallePedido();
@@ -88,7 +91,8 @@ export const DashboardProvider = ({ children }: { children: ReactNode }) => {
         isOpenModal, setIsOpenModal,
         isEdit, setIsEdit,
         openDraw, setOpenDraw,
-        createCategoria, setCreateCategoria
+        createCategoria, setCreateCategoria,
+        openSearchProducto, setOpenSearchProducto
     };
 
     return <DashboardContext.Provider value={storage}>{children}</DashboardContext.Provider>;

@@ -84,9 +84,7 @@ export const PRODUCTOS_VIEW = () => {
                 )
             }
         </div>
-        <ModalForm isOpen={isOpenModal} closePromise={handle_OpenModelNav} dialog_title={isEdit ? 'Editar Producto' : 'Agregar Producto'}>
-            <FORM_PRODUCTO />
-        </ModalForm>
+        <ModalForm isOpen={isOpenModal} closePromise={handle_OpenModelNav} dialog_title={isEdit ? 'Editar Producto' : 'Agregar Producto'}><FORM_PRODUCTO /></ModalForm>
         <DrawerComponent isOpen={openDraw} onClose={handle_open_drawe} title='Categoria'>
             <div className="flex w-full h-full justify-between flex-col gap-2">
                 <div className="flex flex-col gap-2 items-center justify-center">
