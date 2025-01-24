@@ -25,7 +25,7 @@ export const LOGIN_VIEW = () => {
                     </div>
                     <div className="p-1">
                         <p className="text-white">¿No tienes cuenta? - <Link to='/registro' className="text-gray-300">Registrate</Link></p>
-                        <p className="text-white">¿Te has olvidado la contraseña? - <Link to='/restore' className="text-gray-300">Restaurala</Link></p>
+                        <p className="text-white">¿Te has olvidado la contraseña? - <Link to='/recover' className="text-gray-300">Restaurala</Link></p>
                     </div>
                 </div>
             </div>

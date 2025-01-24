@@ -18,3 +18,10 @@ export interface RegisterUserType extends BaseType {
     admin: boolean;
     estado: boolean;
 }
+
+export interface NewPasswordType {
+    new_password: string;
+    repeat_password: string;
+    code: number;
+    email: string;
+}

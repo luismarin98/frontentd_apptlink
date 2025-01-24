@@ -13,7 +13,7 @@ interface IPropsOptionComponent extends SelectHTMLAttributes<HTMLOptionElement> 
 export const SELECT_COMPONENT = ({ label, register, children, ...props }: IPropsSelectComponent) => {
     return (
         <div className="form-group w-full flex gap-2 flex-row">
-            <label htmlFor={props.id} className="w-full text-center">{label}</label>
+            <label htmlFor={props.id} className="w-1/2 text-center">{label}</label>
             <select className="form-control w-full rounded-md text-black" {...register} {...props}>
                 {children}
             </select>

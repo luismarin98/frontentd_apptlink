@@ -43,6 +43,21 @@ export const useDetallePedido = () => {
         });
     }
 
+    const post_some_detallePedidos = (lista_detalles: DetallePedidoType[]) => {
+        setIsLoading(true);
+        toast.promise(axios.post<string>(`${api_consum}/DetallePedido/save_list`, { ...lista_detalles }), {
+            loading: 'Guardando detalle del pedido',
+            success: (res) => {
+                setIsLoading(false);
+                return res.data;
+            },
+            error: (err: AxiosError<any>) => {
+                setIsLoading(false);
+                return err.response!.data;
+            }
+        });
+    }
+
     const post_detallePedidos = (detalle_pedido: DetallePedidoType) => {
         setIsLoading(true);
         toast.promise(axios.post<string>(`${api_consum}/DetallePedido`, { ...detalle_pedido }), {
@@ -88,5 +103,5 @@ export const useDetallePedido = () => {
         });
     }
 
-    return { getAll_detallePedidos, get_detallePedidos, post_detallePedidos, put_detallePedidos, delete_detallePedidos }
+    return { getAll_detallePedidos, get_detallePedidos, post_detallePedidos, put_detallePedidos, delete_detallePedidos, post_some_detallePedidos }
 }

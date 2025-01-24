@@ -1,7 +1,7 @@
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { DashboardRoutes, InicioRoutes } from './Routes';
 import { UsuarioType } from './Interfaces/UsuarioRequest';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { useDispatch } from 'react-redux';
 import { getUsuario } from './Store/Usuario/usuario.slice';
@@ -9,10 +9,10 @@ import { getUsuario } from './Store/Usuario/usuario.slice';
 export const App = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [token, setToken] = useState<string | null>('');
 
-  const token = localStorage.getItem('usuario');
-  
   useEffect(() => {
+    setToken(localStorage.getItem('usuario'));
     if (token) {
       try {
         const decoded = jwtDecode(token);
@@ -23,10 +23,10 @@ export const App = () => {
         console.error('Invalid token', error);
         navigate('/');
       }
-    } else {
+    } else if (token === null) {
       navigate('/');
     }
-  }, [token]);
+  }, []);
 
   return (
     <div className="bg-neutral-800 h-screen w-screen flex justify-center text-white items-center">
@@ -35,8 +35,8 @@ export const App = () => {
           <Route path='' element={<InicioRoutes.HomeRoute />} />
           <Route path='login' element={<InicioRoutes.LoginRoute />} />
           <Route path='registro' element={<InicioRoutes.RegisterRoute />} />
-          <Route path='verificacion' element={<InicioRoutes.VerificateRoute />} />
           <Route path='restore' element={<InicioRoutes.RestoreAccountRoute />} />
+          <Route path='recover' element={<InicioRoutes.SendEmailRecoverRoute />} />
           <Route path="*" element={<div>Not Found</div>} />
         </Route>
         <Route path="/dashboard/:userid" element={<DashboardRoutes.DashboardRoute />}>

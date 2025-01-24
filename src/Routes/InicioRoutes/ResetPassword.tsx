@@ -1,5 +1,6 @@
+import { StartProvider } from "../../Features/InicioFeature/provider"
+import { SEN_EMAIL_RECOVER_VIEW } from "../../Features/InicioFeature/Views/SendEmailRecover"
 
-
-export const RESET_PASSWORD_ROUTE = () => {
-    return <div>Reset Password</div>
+export const SEN_EMAIL_RECOVER_ROUTE = () => {
+    return <StartProvider children={<SEN_EMAIL_RECOVER_VIEW />} />
 }

@@ -1,9 +1,9 @@
 import { useContext, MouseEvent } from "react";
-import { ProductoType } from "../Interfaces/ProductoRequest";
-import DashboardContext, { IDashboardContext } from "../Features/Dashboard/provider";
+import { ProductoType } from "../../Interfaces/ProductoRequest";
+import DashboardContext, { IDashboardContext } from "../../Features/Dashboard/provider";
 import { useDispatch } from "react-redux";
-import { getProducto } from "../Store/Producto/producto.slice";
-import { ButtonComponent } from "./ButtonComponent";
+import { getProducto } from "../../Store/Producto/producto.slice";
+import { ButtonComponent } from "../ButtonComponent";
 import moment from "moment";
 
 export const PRODUCTO_CARD = (props: ProductoType) => {

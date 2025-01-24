@@ -19,7 +19,13 @@ export interface IDashboardContext {
     openDraw: boolean
     createCategoria: boolean
     openSearchProducto: boolean
+    userInfoModal: boolean
+    lista_detalle: DetallePedidoType[]
+    showAddDetalle: boolean
+    titleView: string
 
+    setTitleView: Dispatch<SetStateAction<string>>
+    setShowAddDetalle: Dispatch<SetStateAction<boolean>>
     setCreateCategoria: Dispatch<SetStateAction<boolean>>
     setOpenDraw: Dispatch<SetStateAction<boolean>>
     setIsEdit: Dispatch<SetStateAction<boolean>>
@@ -27,6 +33,8 @@ export interface IDashboardContext {
     setIsOpenModal: Dispatch<SetStateAction<boolean>>
     setIsLoading: Dispatch<SetStateAction<boolean>>
     setOpenSearchProducto: Dispatch<SetStateAction<boolean>>
+    setUserInfoModal: Dispatch<SetStateAction<boolean>>
+    setLista_Detalles: Dispatch<SetStateAction<DetallePedidoType[]>>
 
     //Productos
     delete_productos: (id: number) => void;
@@ -42,6 +50,7 @@ export interface IDashboardContext {
     post_detallePedidos: (body: DetallePedidoType) => void;
     put_detallePedidos: (body: DetallePedidoType) => void;
     delete_detallePedidos: (id: number) => void;
+    post_some_detallePedidos: (lista_detalles: DetallePedidoType[]) => void
 
     //Categoria
     delete_categoria: (id: number) => void;
@@ -66,14 +75,18 @@ const DashboardContext = createContext({});
 export const DashboardProvider = ({ children }: { children: ReactNode }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+    const [userInfoModal, setUserInfoModal] = useState<boolean>(false);
     const [isEdit, setIsEdit] = useState<boolean>(false);
     const [loading, setIsLoading] = useState<boolean>(false);
     const [openDraw, setOpenDraw] = useState<boolean>(false);
     const [createCategoria, setCreateCategoria] = useState<boolean>(false);
     const [openSearchProducto, setOpenSearchProducto] = useState<boolean>(false);
+    const [showAddDetalle, setShowAddDetalle] = useState<boolean>(false);
+    const [lista_detalle, setLista_Detalles] = useState<DetallePedidoType[]>([]);
+    const [titleView, setTitleView] = useState<string>('');
 
     const { delete_productos, get_productos, getAll_productos, post_productos, put_productos, get_filter_productos } = useProducto();
-    const { getAll_detallePedidos, get_detallePedidos, post_detallePedidos, put_detallePedidos, delete_detallePedidos } = useDetallePedido();
+    const { getAll_detallePedidos, get_detallePedidos, post_detallePedidos, put_detallePedidos, delete_detallePedidos, post_some_detallePedidos } = useDetallePedido();
     const { delete_categoria, get_all_categorias, get_categoria, post_categoria, put_categoria } = useCategoria();
     const { delete_pedido, getAll_pedidos, get_pedido, post_pedido, put_pedido } = usePedidos();
     const { get_usuario_info } = useUsuario();
@@ -84,7 +97,7 @@ export const DashboardProvider = ({ children }: { children: ReactNode }) => {
         loading,
         setIsLoading,
         delete_productos, get_productos, getAll_productos, post_productos, put_productos, get_filter_productos,
-        getAll_detallePedidos, get_detallePedidos, post_detallePedidos, put_detallePedidos, delete_detallePedidos,
+        getAll_detallePedidos, get_detallePedidos, post_detallePedidos, put_detallePedidos, delete_detallePedidos, post_some_detallePedidos,
         delete_categoria, get_all_categorias, get_categoria, post_categoria, put_categoria,
         delete_pedido, getAll_pedidos, get_pedido, post_pedido, put_pedido,
         get_usuario_info,
@@ -92,7 +105,11 @@ export const DashboardProvider = ({ children }: { children: ReactNode }) => {
         isEdit, setIsEdit,
         openDraw, setOpenDraw,
         createCategoria, setCreateCategoria,
-        openSearchProducto, setOpenSearchProducto
+        openSearchProducto, setOpenSearchProducto,
+        userInfoModal, setUserInfoModal,
+        lista_detalle, setLista_Detalles,
+        showAddDetalle, setShowAddDetalle,
+        titleView, setTitleView
     };
 
     return <DashboardContext.Provider value={storage}>{children}</DashboardContext.Provider>;

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import StartContext, { IStartContext } from "../provider";
 import { AuthUsuarioType } from "../../../Interfaces/AuthRequest";
 import toast from "react-hot-toast";
@@ -7,8 +7,7 @@ import { RegisterUserType, UsuarioType } from "../../../Interfaces/UsuarioReques
 import { jwtDecode } from "jwt-decode";
 
 export const useUsuario = () => {
-    const { setLoading, navigate } = useContext(StartContext) as IStartContext;
-    const [codeInput, setCodeInput] = useState<boolean>(false);
+    const { setLoading, navigate, setEmail } = useContext(StartContext) as IStartContext;
 
     const login = (data: AuthUsuarioType) => {
         setLoading(true);
@@ -44,14 +43,30 @@ export const useUsuario = () => {
         })
     }
 
-    const verificarCodigo = (email: string, code: string) => {
+    const get_recover = (email: string) => {
         setLoading(true);
-        setCodeInput(true);
+        if (!email) return toast.error("Asegurate de enviar un correo electronico antes");
+        toast.promise(axios.get(`${process.env.REACT_APP_RUTA_API}/Usuario/recover/${email}`), {
+            loading: 'Cargando',
+            success: (res) => {
+                setLoading(false);
+                setEmail(email);
+                navigate('/restore');
+                return res.data;
+            },
+            error: (err: AxiosError<any>) => {
+                setLoading(false);
+                return err.response!.data;
+            }
+        })
+    }
+
+    const verificarCodigo = (email: string, code: number) => {
+        setLoading(true);
         toast.promise(axios.get(`${process.env.REACT_APP_RUTA_API}/Usuario/${email}/${code}`), {
             loading: 'Cargando...',
             success: (res) => {
                 setLoading(false);
-                setCodeInput(false);
                 return 'Verificacion completada, redireccionando...'
             },
             error: (err: AxiosError<any>) => {
@@ -67,7 +82,6 @@ export const useUsuario = () => {
             loading: 'Actualizando datos...',
             success: (res) => {
                 setLoading(false);
-                setCodeInput(false);
                 return 'Actualizacion completada'
             },
             error: (err: AxiosError<any>) => {
@@ -77,5 +91,5 @@ export const useUsuario = () => {
         })
     }
 
-    return { login, codeInput, register_usuario, verificarCodigo, updateUser }
+    return { login, register_usuario, verificarCodigo, updateUser, get_recover }
 }

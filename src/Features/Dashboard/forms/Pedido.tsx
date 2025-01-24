@@ -8,6 +8,7 @@ import { InputComponent } from "../../../Components/InputComponent";
 import { ButtonComponent } from "../../../Components/ButtonComponent";
 import toast from "react-hot-toast";
 import { getPedido } from "../../../Store/Pedido/pedido.slice";
+import moment from "moment";
 
 export const FormPedido = () => {
     const { put_pedido, post_pedido, setIsOpenModal, isEdit, setIsEdit } = useContext(DashboardContext) as IDashboardContext;
@@ -18,6 +19,8 @@ export const FormPedido = () => {
     useEffect(() => { pedido != null && reset(pedido) }, [reset, pedido]);
 
     const submit = handleSubmit((data) => {
+        data.fecha_creacion = new Date().toISOString();
+        moment(data.fecha_creacion).toISOString();
         if (!data) return toast.error('Asegurate de rellenar los campos antes de enviar la informacion');
         isEdit ? put_pedido(data) : post_pedido(data);
         isEdit && setIsEdit(false);
@@ -39,8 +42,8 @@ export const FormPedido = () => {
             <InputComponent label="Usuario" register={register('usuario_id')} />
             <InputComponent label="Fecha" type="date" register={register('fecha_pedido')} />
             <div className="flex flex-row items-center justify-center w-full">
-                <ButtonComponent type="submit">Guardar</ButtonComponent>
-                <ButtonComponent onClick={handle_cancel}>Cancelar</ButtonComponent>
+                <ButtonComponent align_text="center" type="submit">Guardar</ButtonComponent>
+                <ButtonComponent align_text="center" onClick={handle_cancel}>Cancelar</ButtonComponent>
             </div>
         </form>
     )

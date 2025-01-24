@@ -4,19 +4,20 @@ import { useSelector } from "react-redux";
 import { pedido_list_selector } from "../../../Store/Pedido/pedido.selector";
 import { PedidoType } from "../../../Interfaces/PedidoRequest";
 import { ButtonComponent } from "../../../Components/ButtonComponent";
-import { CardPedido } from "../../../Components/CardPedido";
+import { CardPedido } from "../../../Components/Cards/CardPedido";
 import { PAGINACION_COMPONENT } from "../../../Components/Paginacion";
-import { usuario_selector } from "../../../Store/Usuario/usuario.selector";
 import { ModalForm } from "../../../Components/ModalForm";
 import { FormPedido } from "../forms/Pedido";
 
 export const PEDIDOS_VIEW = () => {
-    const usuario = useSelector(usuario_selector);
     const { getAll_pedidos, setIsOpenModal, isOpenModal } = useContext(DashboardContext) as IDashboardContext;
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [pedidoPerPage, setPedidoPerPage] = useState<number>(10);
 
-    useEffect(() => { getAll_pedidos() }, []);
+    useEffect(() => { 
+        getAll_pedidos()
+
+     }, []);
 
     const pedidos = useSelector(pedido_list_selector);
 
@@ -35,9 +36,6 @@ export const PEDIDOS_VIEW = () => {
 
     return (
         <div className="w-full h-full flex flex-col justify-between items-center">
-            <div className="w-full p-2">
-                <p>Catalogo de pedidos</p>
-            </div>
             <div className="w-full h-full flex flex-col justify-between gap-2">
                 <div className="w-full flex justify-between p-2">
                     <ButtonComponent onClick={handle_create_pedido}>Crear Pedido</ButtonComponent>

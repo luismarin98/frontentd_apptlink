@@ -1,46 +1,72 @@
-# Getting Started with Create React App
+# ApptLink Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+ApptLink is a web application designed to manage products and users efficiently. The project is built using TypeScript and React, with state management handled by Redux.
 
-In the project directory, you can run:
+## Features
 
-### `yarn start`
+- **Product Management**: Add, edit, and delete products.
+- **User Management**: Add, edit, and delete users.
+- **Responsive Design**: The application is fully responsive and works on various devices.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Project Structure
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The project is organized into several key components and features:
 
-### `yarn test`
+### Components
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **ButtonComponent**: A reusable button component.
+- **InputComponent**: A reusable input component.
+- **SelectComponent**: A reusable select component with options.
+- **CardUsuario**: A responsive card component to display user information.
 
-### `yarn build`
+### Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Dashboard**: Contains forms and logic for managing products and users.
+- **Forms**: Includes forms for adding and editing products and users.
+- **Provider**: Context provider for managing global state in the dashboard.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Interfaces
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **ProductoRequest**: Defines the structure for product-related data.
+- **UsuarioRequest**: Defines the structure for user-related data.
 
-### `yarn eject`
+## Installation
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+To install the project dependencies, run:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```sh
+npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Usage
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+To start the development server, run:
 
-## Learn More
+```sh
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Key Files
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **src/Features/Dashboard/forms/Producto.tsx**: Contains the form logic for adding and editing products.
+- **src/Components/Cards/CardUsuario.tsx**: Contains the responsive card component for displaying user information.
+- **src/Interfaces/ProductoRequest.ts**: Defines the product data structure.
+- **src/Interfaces/UsuarioRequest.ts**: Defines the user data structure.
+
+## Validation
+
+The project includes validation for form inputs to ensure data integrity. For example, the `precio` field in the product form only allows valid decimal numbers without commas.
+
+## Styling
+
+The project uses CSS Flexbox and media queries to ensure responsive design. The `user-card` class is used to style the user information card.
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
+
+## License
+
+This project is licensed under the MIT License.

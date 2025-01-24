@@ -12,7 +12,7 @@ import { categoria_list_selector } from "../../../Store/Categoria/categoria.sele
 import { OPTION_COMPONENT, SELECT_COMPONENT } from "../../../Components/SelectComponent";
 
 export const FORM_PRODUCTO = () => {
-    const { put_productos, post_productos, isEdit, setIsEdit, setIsOpenModal, loading } = useContext(DashboardContext) as IDashboardContext;
+    const { put_productos, post_productos, isEdit, setIsEdit, setIsOpenModal } = useContext(DashboardContext) as IDashboardContext;
     const { handleSubmit, reset, register } = useForm<ProductoType>();
     const dispatch = useDispatch();
     const producto = useSelector(producto_selector);
@@ -41,16 +41,7 @@ export const FORM_PRODUCTO = () => {
         <form onSubmit={submit} className="flex flex-col gap-2 justify-center items-center w-full">
             <InputComponent label="Nombre" id="nombre" register={register('nombre')} />
             <InputComponent label="Descripción" id="descripcion" register={register('descripcion')} />
-            <InputComponent 
-                label="Precio" 
-                id="precio" 
-                register={register('precio', {
-                    pattern: {
-                        value: /^[0-9]*\.?[0-9]+$/,
-                        message: "El precio debe ser un número válido sin comas y con un punto decimal."
-                    }
-                })} 
-            />
+            <InputComponent label="Precio" id="precio" register={register('precio')} />
             <InputComponent label="Stock" id='stock' register={register('stock')} />
             <SELECT_COMPONENT label="Categoria" register={register('categoria_id')}>
                 <OPTION_COMPONENT label="Seleccionar una categoria" />
@@ -59,8 +50,8 @@ export const FORM_PRODUCTO = () => {
                 ))}
             </SELECT_COMPONENT>
             <div className="flex flex-row gap-1 justify-center items-center">
-                <ButtonComponent type_button="succes" type="submit" disabled={loading}>Guardar</ButtonComponent>
-                <ButtonComponent onClick={handleCancel} type_button="warning" disabled={loading}>Cancelar</ButtonComponent>
+                <ButtonComponent type_button="succes" type="submit">Guardar</ButtonComponent>
+                <ButtonComponent onClick={handleCancel} type_button="warning">Cancelar</ButtonComponent>
             </div>
         </form>
     );

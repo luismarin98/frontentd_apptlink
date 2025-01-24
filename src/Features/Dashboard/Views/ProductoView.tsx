@@ -5,18 +5,21 @@ import { PAGINACION_COMPONENT } from "../../../Components/Paginacion";
 import { ModalForm } from "../../../Components/ModalForm";
 import DashboardContext, { IDashboardContext } from "../provider";
 import { FORM_PRODUCTO } from "../forms/Producto";
-import { PRODUCTO_CARD } from "../../../Components/ProductoCard";
+import { PRODUCTO_CARD } from "../../../Components/Cards/ProductoCard";
 import { CATEGORIA_FORM } from "../forms/Categoria";
 import { DrawerComponent } from "../../../Components/DrawerComponent";
 import { useSelector } from "react-redux";
 import { categoria_list_selector } from "../../../Store/Categoria/categoria.selector";
-import { CardCategoria } from "../../../Components/CardCategoria";
+import { CardCategoria } from "../../../Components/Cards/CardCategoria";
 import { productos_selector } from "../../../Store/Producto/producto.selector";
 
 export const PRODUCTOS_VIEW = () => {
     const { isOpenModal, setIsOpenModal, isEdit, get_all_categorias, getAll_productos, setOpenDraw, openDraw, setCreateCategoria, createCategoria, setIsEdit } = useContext(DashboardContext) as IDashboardContext;
 
-    useEffect(() => { get_all_categorias(); getAll_productos() }, []);
+    useEffect(() => { 
+        get_all_categorias(); 
+        getAll_productos() 
+    }, []);
 
     const categorias = useSelector(categoria_list_selector);
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -45,9 +48,6 @@ export const PRODUCTOS_VIEW = () => {
     const total_Pages: number = productos ? Math.ceil(productos.length / productosPerPage) : 1;
 
     return <div className="w-full h-full flex flex-col items-center justify-center">
-        <div className="w-full p-2">
-            <p className="font-semibold text-xl uppercase">Catalogo de productos</p>
-        </div>
         <div className="w-full flex flex-row items-center justify-between p-1 gap-2">
             <ButtonComponent onClick={handleAddProducto}>Agregar Producto</ButtonComponent>
             <div className="flex gap-2">

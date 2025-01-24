@@ -1,9 +1,9 @@
 import { useContext, MouseEvent } from "react";
-import { CategoriaType } from "../Interfaces/CategoriaRequest";
-import DashboardContext, { IDashboardContext } from "../Features/Dashboard/provider";
+import { CategoriaType } from "../../Interfaces/CategoriaRequest";
+import DashboardContext, { IDashboardContext } from "../../Features/Dashboard/provider";
 import { useDispatch } from "react-redux";
-import { getCategoria } from "../Store/Categoria/categoria.slice";
-import { ButtonComponent } from "./ButtonComponent";
+import { getCategoria } from "../../Store/Categoria/categoria.slice";
+import { ButtonComponent } from "../ButtonComponent";
 
 export const CardCategoria = (props: CategoriaType) => {
     const { isEdit, setIsEdit, delete_categoria, setCreateCategoria, createCategoria, get_filter_productos } = useContext(DashboardContext) as IDashboardContext
