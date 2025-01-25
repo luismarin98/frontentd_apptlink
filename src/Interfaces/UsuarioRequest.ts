@@ -25,3 +25,9 @@ export interface NewPasswordType {
     code: number;
     email: string;
 }
+
+export interface RestorePassword {
+    email: string;
+    code: number;
+    password: string;
+}

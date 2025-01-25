@@ -9,7 +9,9 @@ export const SEN_EMAIL_RECOVER_VIEW = () => {
     const { get_recover } = useContext(StartContext) as IStartContext;
     const { handleSubmit, register } = useForm<{ email: string }>();
 
-    const submit = handleSubmit((data) => get_recover(data.email));
+    const submit = handleSubmit((data) => {
+        get_recover(data.email);
+    });
 
     return (
         <div className="w-full h-full flex items-center justify-center">
@@ -17,7 +19,7 @@ export const SEN_EMAIL_RECOVER_VIEW = () => {
                 <div className="w-full h-full flex items-center justify-center flex-col gap-2">
                     <p className="text-2xl uppercase">Correo de recuperacion</p>
                     <form onSubmit={submit} className="w-full flex flex-col items-center justify-center gap-2 p-2">
-                        <InputComponent label="Email" type="password" register={register('email')} />
+                        <InputComponent label="Email" type="email" register={register('email')} />
                         <ButtonComponent type="submit">Restablecer</ButtonComponent>
                     </form>
                 </div>

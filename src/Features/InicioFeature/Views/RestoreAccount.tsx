@@ -1,22 +1,28 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import StartContext, { IStartContext } from "../provider";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { NewPasswordType } from "../../../Interfaces/UsuarioRequest";
 import { InputComponent } from "../../../Components/InputComponent";
 import { ButtonComponent } from "../../../Components/ButtonComponent";
+import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
+import { email_selector } from "../../../Store/Usuario/usuario.selector";
 
 export const RESTORE_ACCOUNT_VIEW = () => {
-    const { email } = useContext(StartContext) as IStartContext;
-    const { handleSubmit, register, setValue } = useForm<NewPasswordType>();
-
-    useEffect(() => { if (email) setValue('email', email) }, [email]);
+    const { recover_password } = useContext(StartContext) as IStartContext;
+    const { handleSubmit, register } = useForm<NewPasswordType>();
+    const email = useSelector(email_selector);
 
     const submit = handleSubmit((data) => {
         if (data.new_password === data.repeat_password) {
-            console.log('Restableciendo contraseña');
-        } else {
-            console.error('Las contraseñas no coinciden');
+            data.email = email!;
+            recover_password({ code: data.code, email: data.email, password: data.new_password });
+        } else if (data.new_password === '' || data.repeat_password === '') {
+            toast.error('Las contraseñas no pueden estar vacias');
+        }
+        else {
+            toast.error('Las contraseñas no coinciden');
         }
     });
 
@@ -26,9 +32,10 @@ export const RESTORE_ACCOUNT_VIEW = () => {
                 <div className="w-full h-full flex items-center justify-between flex-col bebas-neue-regular">
                     <div className="w-full h-full flex items-center justify-center flex-col">
                         <p className="text-2xl uppercase">Recuperar Contraseña</p>
-                        <form onSubmit={submit} className="w-full flex flex-col items-center justify-center gap-2">
+                        <form onSubmit={submit} className="w-full flex flex-col items-center justify-center gap-2 p-2">
                             <InputComponent label="Nueva contraseña" type="password" register={register('new_password')} />
                             <InputComponent label="Repetir contraseña" type="password" register={register('repeat_password')} />
+                            <InputComponent label="Codigo" type="text" register={register('code')} />
                             <ButtonComponent type="submit">Restablecer</ButtonComponent>
                         </form>
                     </div>

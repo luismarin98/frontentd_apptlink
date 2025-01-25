@@ -10,13 +10,13 @@ import { ModalForm } from "../../../Components/ModalForm";
 import { FormPedido } from "../forms/Pedido";
 
 export const PEDIDOS_VIEW = () => {
-    const { getAll_pedidos, setIsOpenModal, isOpenModal } = useContext(DashboardContext) as IDashboardContext;
+    const { getAll_pedidos, setIsOpenModal, isOpenModal, getAll_productos } = useContext(DashboardContext) as IDashboardContext;
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [pedidoPerPage, setPedidoPerPage] = useState<number>(10);
 
     useEffect(() => { 
-        getAll_pedidos()
-
+        getAll_pedidos();
+        getAll_productos();
      }, []);
 
     const pedidos = useSelector(pedido_list_selector);
