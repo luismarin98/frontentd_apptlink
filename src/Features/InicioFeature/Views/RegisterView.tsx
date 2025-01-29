@@ -9,12 +9,17 @@ export const REGISTER_VIEW = () => {
     const [coincidence, setCoincidence] = useState<boolean>(false);
     const [check, setCheck] = useState<boolean>(false);
 
-    const { register, getValues, handleSubmit } = useForm<RegisterUserType>();
+    const { register, getValues, handleSubmit, reset } = useForm<RegisterUserType>();
 
     const handleCoincidence = (e: ChangeEvent<HTMLInputElement>) => e.target.value === getValues('password') && setCoincidence(!coincidence);
     const handleCheck = (e: ChangeEvent<HTMLInputElement>) => e.target.checked && setCheck(!check);
 
-    const submitForm = handleSubmit(data => register_usuario(data));
+    const submitForm = handleSubmit(data => {
+        data.fecha_creacion = new Date().toISOString();
+        data.fecha_actualizacion = new Date().toISOString();
+        register_usuario(data);
+        reset();
+    });
 
     return (
         <div className="w-full h-full flex items-center justify-center">
@@ -25,7 +30,7 @@ export const REGISTER_VIEW = () => {
                         <form onSubmit={submitForm} className="w-full flex flex-col items-center justify-center gap-2">
                             <input type="text" placeholder="Nombre" {...register('nombre')} className="p-2 w-5/6 rounded-lg text-black" />
                             <input type="text" placeholder="Apellido" {...register('apellido')} className="p-2 w-5/6 rounded-lg text-black" />
-                            <input type="email" placeholder="Email" {...register('email')} className="p-2 w-5/6 rounded-lg text-black" />
+                            <input type="email" placeholder="Email" required {...register('email')} className="p-2 w-5/6 rounded-lg text-black" />
                             <input type="password" {...register('password')} placeholder="Contraseña" className="p-2 w-5/6 rounded-lg text-black" />
                             <input type="password" onChange={handleCoincidence} placeholder="Confirmar Contraseña" className="p-2 w-5/6 rounded-lg text-black" />
                             <div className="flex items-center gap-1 justify-center p-2">
@@ -36,7 +41,7 @@ export const REGISTER_VIEW = () => {
                         </form>
                         <div className="flex flex-col items-center justify-center gap-1 p-2">
                             <p className={`flex items-center gap-1 justify-center ${coincidence && 'text-green-500'}`}><span className="material-symbols-outlined">verified</span> Contraseñas coinciden</p>
-                            <p className="flex items-center gap-1 justify-center"><span className="material-symbols-outlined">verified</span> Email Correcto</p>
+                            <p className={`flex items-center gap-1 justify-center ${coincidence && 'text-green-500'}`}><span className="material-symbols-outlined">verified</span> Email Correcto</p>
                         </div>
                     </div>
                     <div className="p-1">

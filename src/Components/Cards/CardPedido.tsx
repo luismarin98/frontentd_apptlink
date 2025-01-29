@@ -11,7 +11,7 @@ import { DrawerComponent } from "../DrawerComponent";
 import { FORM_DETALLE_PEDIDO } from "../../Features/Dashboard/forms/DetallePedido";
 
 export const CardPedido = (props: PedidoType) => {
-    const { get_usuario_info, isEdit, setIsEdit, delete_pedido, userInfoModal, setUserInfoModal, openDraw, setOpenDraw, lista_detalle } = useContext(DashboardContext) as IDashboardContext;
+    const { get_usuario_info, isEdit, setIsEdit, delete_pedido, userInfoModal, setUserInfoModal, openDraw, setOpenDraw, get_factura } = useContext(DashboardContext) as IDashboardContext;
     const usuario = useSelector(usuario_selector);
 
     const handle_userInfo = (e: MouseEvent<HTMLButtonElement>) => {
@@ -23,6 +23,11 @@ export const CardPedido = (props: PedidoType) => {
     const handleEdit = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         setIsEdit(!isEdit);
+    }
+
+    const handle_factura = (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        get_factura(props.id);
     }
 
     const handleCancel = (e: MouseEvent<HTMLButtonElement>) => {
@@ -45,6 +50,7 @@ export const CardPedido = (props: PedidoType) => {
                 <ButtonComponent align_text="center" onClick={handleEdit}>Editar</ButtonComponent>
                 <ButtonComponent align_text="center" onClick={handleCancel}>Eliminar</ButtonComponent>
                 <ButtonComponent align_text="center" onClick={handle_open_drawer}>Agregar Productos</ButtonComponent>
+                <ButtonComponent align_text="center" onClick={handle_factura}>Generar Factura</ButtonComponent>
             </div>
             <ModalForm isOpen={userInfoModal} closePromise={() => setUserInfoModal(!userInfoModal)} dialog_title="Informacion del usuario" >
                 {usuario && <CardUsuario {...usuario} />}

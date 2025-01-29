@@ -37,6 +37,7 @@ export const useUsuario = () => {
             loading: 'Cargando',
             success: (res) => {
                 setLoading(false);
+                navigate('/login');
                 return res.data;
             },
             error: (err: AxiosError<any>) => {

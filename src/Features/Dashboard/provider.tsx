@@ -10,6 +10,7 @@ import { usePedidos } from './hooks/usePedidos';
 import { PedidoType } from '../../Interfaces/PedidoRequest';
 import { useUsuario } from './hooks/useUsuario';
 import { UsuarioType } from '../../Interfaces/UsuarioRequest';
+import { useFactura } from './hooks/useFactura';
 
 export interface IDashboardContext {
     isOpen: boolean
@@ -66,6 +67,9 @@ export interface IDashboardContext {
     post_pedido: (body: PedidoType) => void;
     put_pedido: (body: PedidoType) => void;
 
+    //Factura
+    get_factura: (id_pedido: number) => void;
+
     //Usuario
     get_usuario_info: (id: number) => Promise<UsuarioType | undefined>
 }
@@ -89,18 +93,19 @@ export const DashboardProvider = ({ children }: { children: ReactNode }) => {
     const { getAll_detallePedidos, get_detallePedidos, post_detallePedidos, put_detallePedidos, delete_detallePedidos, post_some_detallePedidos } = useDetallePedido();
     const { delete_categoria, get_all_categorias, get_categoria, post_categoria, put_categoria } = useCategoria();
     const { delete_pedido, getAll_pedidos, get_pedido, post_pedido, put_pedido } = usePedidos();
+    const { get_factura } = useFactura();
+
     const { get_usuario_info } = useUsuario();
 
     const storage: IDashboardContext = {
-        isOpen,
-        setIsOpen,
-        loading,
-        setIsLoading,
         delete_productos, get_productos, getAll_productos, post_productos, put_productos, get_filter_productos,
         getAll_detallePedidos, get_detallePedidos, post_detallePedidos, put_detallePedidos, delete_detallePedidos, post_some_detallePedidos,
         delete_categoria, get_all_categorias, get_categoria, post_categoria, put_categoria,
         delete_pedido, getAll_pedidos, get_pedido, post_pedido, put_pedido,
         get_usuario_info,
+        get_factura,
+        isOpen, setIsOpen,
+        loading, setIsLoading,
         isOpenModal, setIsOpenModal,
         isEdit, setIsEdit,
         openDraw, setOpenDraw,
