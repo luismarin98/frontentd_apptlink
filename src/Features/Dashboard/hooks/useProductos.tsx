@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import axios, { AxiosError } from "axios";
 import { getProducto, getProductos } from "../../../Store/Producto/producto.slice";
 import { ProductoType } from "../../../Interfaces/ProductoRequest";
+import { api } from "../../../Components/RutaApi";
 
 export const useProducto = () => {
     const { setIsLoading } = useContext(DashboardContext) as IDashboardContext;
@@ -12,7 +13,7 @@ export const useProducto = () => {
 
     const getAll_productos = () => {
         setIsLoading(true);
-        toast.promise(axios.get<ProductoType[]>(`${process.env.REACT_APP_RUTA_API}/Producto`), {
+        toast.promise(axios.get<ProductoType[]>(`${api}/Producto`), {
             loading: 'Cargando productos...',
             success: (res) => {
                 setIsLoading(false);
@@ -28,7 +29,7 @@ export const useProducto = () => {
 
     const get_filter_productos = (id: number) => {
         setIsLoading(true);
-        toast.promise(axios.get<ProductoType[]>(`${process.env.REACT_APP_RUTA_API}/Producto/filtrar_categoria/${id}`), {
+        toast.promise(axios.get<ProductoType[]>(`${api}/Producto/filtrar_categoria/${id}`), {
             loading: 'Cargando productos...',
             success: (res) => {
                 setIsLoading(false);
@@ -44,7 +45,7 @@ export const useProducto = () => {
 
     const get_productos = (id: number) => {
         setIsLoading(true);
-        toast.promise(axios.get<ProductoType>(`${process.env.REACT_APP_RUTA_API}/Producto/${id}`), {
+        toast.promise(axios.get<ProductoType>(`${api}/Producto/${id}`), {
             loading: 'Cargando informacion del producto...',
             success: (res) => {
                 setIsLoading(false);
@@ -60,7 +61,7 @@ export const useProducto = () => {
 
     const post_productos = (producto: ProductoType) => {
         setIsLoading(true);
-        toast.promise(axios.post(`${process.env.REACT_APP_RUTA_API}/Producto`, { ...producto }), {
+        toast.promise(axios.post(`${api}/Producto`, { ...producto }), {
             loading: 'Guardando...',
             success: (res) => {
                 setIsLoading(false);
@@ -75,7 +76,7 @@ export const useProducto = () => {
 
     const put_productos = (producto: ProductoType) => {
         setIsLoading(true);
-        toast.promise(axios.put(`${process.env.REACT_APP_RUTA_API}/Producto`, { ...producto }), {
+        toast.promise(axios.put(`${api}/Producto`, { ...producto }), {
             loading: 'Actualizando...',
             success: (res) => {
                 setIsLoading(false);
@@ -90,7 +91,7 @@ export const useProducto = () => {
 
     const delete_productos = (id: number) => {
         setIsLoading(true);
-        toast.promise(axios.post(`${process.env.REACT_APP_RUTA_API}/Producto/${id}`), {
+        toast.promise(axios.post(`${api}/Producto/${id}`), {
             loading: 'Eliminando contenido',
             success: (res) => {
                 setIsLoading(false);

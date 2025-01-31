@@ -3,7 +3,7 @@ import DashboardContext, { IDashboardContext } from "../provider"
 import { DetallePedidoType } from "../../../Interfaces/DetallePedidoRequest";
 import toast from "react-hot-toast";
 import axios, { AxiosError } from "axios";
-import { api_consum } from "../../../Components/RutaApi";
+import { api } from "../../../Components/RutaApi";
 import { useDispatch } from "react-redux";
 import { getDetallePedido, getDetallePedidos } from "../../../Store/DetallePedido/detalle_pedido.slice";
 
@@ -13,7 +13,7 @@ export const useDetallePedido = () => {
 
     const get_detallePedidos = (id: number) => {
         setIsLoading(true);
-        toast.promise(axios.get<DetallePedidoType>(`${api_consum}/DetallePedido/${id}`), {
+        toast.promise(axios.get<DetallePedidoType>(`${api}/DetallePedido/${id}`), {
             loading: 'Obteniendo informacion del pedido',
             success: (res) => {
                 setIsLoading(false);
@@ -29,7 +29,7 @@ export const useDetallePedido = () => {
 
     const getAll_detallePedidos = () => {
         setIsLoading(true);
-        toast.promise(axios.get<DetallePedidoType[]>(`${api_consum}/DetallePedido`), {
+        toast.promise(axios.get<DetallePedidoType[]>(`${api}/DetallePedido`), {
             loading: 'Obteniendo pedidos',
             success: (res) => {
                 setIsLoading(false);
@@ -45,7 +45,7 @@ export const useDetallePedido = () => {
 
     const post_some_detallePedidos = (lista_detalles: DetallePedidoType[]) => {
         setIsLoading(true);
-        toast.promise(axios.post<string>(`${api_consum}/DetallePedido/save_list`, { ...lista_detalles }), {
+        toast.promise(axios.post<string>(`${api}/DetallePedido/save_list`, { ...lista_detalles }), {
             loading: 'Guardando detalle del pedido',
             success: (res) => {
                 setIsLoading(false);
@@ -60,7 +60,7 @@ export const useDetallePedido = () => {
 
     const post_detallePedidos = (detalle_pedido: DetallePedidoType) => {
         setIsLoading(true);
-        toast.promise(axios.post<string>(`${api_consum}/DetallePedido`, { ...detalle_pedido }), {
+        toast.promise(axios.post<string>(`${api}/DetallePedido`, { ...detalle_pedido }), {
             loading: 'Guardando detalle del pedido',
             success: (res) => {
                 setIsLoading(false);
@@ -75,7 +75,7 @@ export const useDetallePedido = () => {
 
     const put_detallePedidos = (detalle_pedido: DetallePedidoType) => {
         setIsLoading(true);
-        toast.promise(axios.put<string>(`${api_consum}/DetallePedido`, { ...detalle_pedido }), {
+        toast.promise(axios.put<string>(`${api}/DetallePedido`, { ...detalle_pedido }), {
             loading: 'Actualizando detalle del pedido',
             success: (res) => {
                 setIsLoading(false);
@@ -90,7 +90,7 @@ export const useDetallePedido = () => {
 
     const delete_detallePedidos = (id: number) => {
         setIsLoading(true);
-        toast.promise(axios.delete<string>(`${api_consum}/DetallePedido/${id}`), {
+        toast.promise(axios.delete<string>(`${api}/DetallePedido/${id}`), {
             loading: 'Eliminando detalle',
             success: (res) => {
                 setIsLoading(false);

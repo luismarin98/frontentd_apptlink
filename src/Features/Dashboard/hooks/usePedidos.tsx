@@ -2,7 +2,7 @@ import { useContext } from "react"
 import DashboardContext, { IDashboardContext } from "../provider"
 import toast from "react-hot-toast";
 import axios, { AxiosError } from "axios";
-import { api_consum } from "../../../Components/RutaApi";
+import { api } from "../../../Components/RutaApi";
 import { useDispatch } from "react-redux";
 import { getPedido, getPedidos } from "../../../Store/Pedido/pedido.slice";
 import { PedidoType } from "../../../Interfaces/PedidoRequest";
@@ -13,7 +13,7 @@ export const usePedidos = () => {
 
     const getAll_pedidos = () => {
         setIsLoading(true);
-        toast.promise(axios.get<PedidoType[]>(`${api_consum}/Pedido`), {
+        toast.promise(axios.get<PedidoType[]>(`${api}/Pedido`), {
             loading: 'cargando pedidos',
             success: (res) => {
                 dispatch(getPedidos(res.data));
@@ -29,7 +29,7 @@ export const usePedidos = () => {
 
     const get_pedido = (id: number) => {
         setIsLoading(true);
-        toast.promise(axios.get<PedidoType>(`${api_consum}/Pedido/${id}`), {
+        toast.promise(axios.get<PedidoType>(`${api}/Pedido/${id}`), {
             loading: 'Buscando pedido',
             success: (res) => {
                 dispatch(getPedido(res.data));
@@ -45,7 +45,7 @@ export const usePedidos = () => {
 
     const post_pedido = (pedido: PedidoType) => {
         setIsLoading(true);
-        toast.promise(axios.post<string>(`${api_consum}/Pedido`, { ...pedido }), {
+        toast.promise(axios.post<string>(`${api}/Pedido`, { ...pedido }), {
             loading: 'Guardando pedido',
             success: (res) => {
                 setIsLoading(false);
@@ -60,7 +60,7 @@ export const usePedidos = () => {
 
     const delete_pedido = (id: number) => {
         setIsLoading(true);
-        toast.promise(axios.post<string>(`${api_consum}/Pedido/${id}`), {
+        toast.promise(axios.post<string>(`${api}/Pedido/${id}`), {
             loading: 'Eliminando pedido',
             success: (res) => {
                 setIsLoading(false);
@@ -75,7 +75,7 @@ export const usePedidos = () => {
 
     const put_pedido = (pedido: PedidoType) => {
         setIsLoading(true);
-        toast.promise(axios.put<string>(`${api_consum}/Pedido`, { ...pedido }), {
+        toast.promise(axios.put<string>(`${api}/Pedido`, { ...pedido }), {
             loading: 'Guardando pedido',
             success: (res) => {
                 setIsLoading(false);

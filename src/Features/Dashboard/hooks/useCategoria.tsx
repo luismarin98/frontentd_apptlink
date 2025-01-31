@@ -5,7 +5,7 @@ import axios, { AxiosError } from "axios";
 import { useDispatch } from "react-redux";
 import { getCategoria, getCategorias } from "../../../Store/Categoria/categoria.slice";
 import { CategoriaType } from "../../../Interfaces/CategoriaRequest";
-import { api_consum } from "../../../Components/RutaApi";
+import { api } from "../../../Components/RutaApi";
 
 export const useCategoria = () => {
     const { setIsLoading } = useContext(DashboardContext) as IDashboardContext;
@@ -13,7 +13,7 @@ export const useCategoria = () => {
 
     const get_categoria = (id: number) => {
         setIsLoading(true);
-        toast.promise(axios.get<CategoriaType>(`${api_consum}/Categoria/${id}`), {
+        toast.promise(axios.get<CategoriaType>(`${api}/Categoria/${id}`), {
             loading: 'Cargando categorias',
             success: (res) => {
                 setIsLoading(false);
@@ -29,7 +29,7 @@ export const useCategoria = () => {
 
     const get_all_categorias = () => {
         setIsLoading(true);
-        toast.promise(axios.get<CategoriaType[]>(`${api_consum}/Categoria`), {
+        toast.promise(axios.get<CategoriaType[]>(`${api}/Categoria`), {
             loading: 'Cargando categorias',
             success: (res) => {
                 setIsLoading(false);
@@ -45,7 +45,7 @@ export const useCategoria = () => {
 
     const post_categoria = (categoria: CategoriaType) => {
         setIsLoading(true);
-        toast.promise(axios.post(`${api_consum}/Categoria`, { ...categoria }), {
+        toast.promise(axios.post(`${api}/Categoria`, { ...categoria }), {
             loading: 'Guardando categorias',
             success: (res) => {
                 setIsLoading(false);
@@ -61,7 +61,7 @@ export const useCategoria = () => {
 
     const put_categoria = (categoria: CategoriaType) => {
         setIsLoading(true);
-        toast.promise(axios.put(`${api_consum}/Categoria`, { ...categoria }), {
+        toast.promise(axios.put(`${api}/Categoria`, { ...categoria }), {
             loading: 'Actualizando categorias',
             success: (res) => {
                 setIsLoading(false);
@@ -77,7 +77,7 @@ export const useCategoria = () => {
 
     const delete_categoria = (id: number) => {
         setIsLoading(true);
-        toast.promise(axios.delete(`${api_consum}/Categoria/${id}`), {
+        toast.promise(axios.delete(`${api}/Categoria/${id}`), {
             loading: 'Eliminando categorias',
             success: (res) => {
                 setIsLoading(false);
